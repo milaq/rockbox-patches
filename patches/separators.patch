@@ -1,0 +1,28 @@
+From 07cca883a678496a7783b0c6f733cc0fe78a76f7 Mon Sep 17 00:00:00 2001
+From: milaq <micha.laqua@gmail.com>
+Date: Sun, 3 Apr 2016 16:20:42 +0200
+Subject: [PATCH] separators: modify 'auto' to draw only the title line
+---
+ apps/gui/line.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/apps/gui/line.c b/apps/gui/line.c
+index 2b1bec2..522ab14 100644
+--- a/apps/gui/line.c
++++ b/apps/gui/line.c
+@@ -314,6 +314,15 @@ static void style_line(struct screen *display,
+         style |= STYLE_INVERT;
+     }
+ 
++    /* HACK: draw only title line when 'auto' line separators are set*/
++    if (global_settings.list_separator_height == -1)
++    {
++        if (line->separator_height == 2)
++            line->separator_height = 1;
++        else
++            line->separator_height = 0;
++    }
++
+     if (line->separator_height > 0 && (line->line == line->nlines-1))
+     {
+         int sep_height = MIN(line->separator_height, height);
