@@ -20,7 +20,6 @@ function apply {
   echo "Getting: $1"
   wget -q https://raw.githubusercontent.com/milaq/rockbox-patches/master/patches/$1.patch
   git am $1.patch
-  echo ""
   check_clean
 }
 
